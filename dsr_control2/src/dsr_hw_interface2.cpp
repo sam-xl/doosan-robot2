@@ -2906,7 +2906,7 @@ namespace dsr_control2{
                 g_joints[6].pos = g_joints[6].pos - 0.01;
             }
             //ROS2 ros::Duration(0.01).sleep();
-            rclcpp::Duration(0.01).seconds();        //check 040404
+            rclcpp::Duration(0.01, 0).seconds();        //check 040404
             
         }
         res->success = true;
@@ -2924,7 +2924,7 @@ namespace dsr_control2{
                 g_joints[6].pos = g_joints[6].pos - 0.01;
             }
             //ROS2 ros::Duration(0.01).sleep();
-            rclcpp::Duration(0.01).seconds();        //check 040404
+            rclcpp::Duration(0.01, 0).seconds();        //check 040404
         }
         res->success = true;
         return true;      
@@ -2942,7 +2942,7 @@ namespace dsr_control2{
                 g_joints[6].pos = g_joints[6].pos - 0.01;
             }
             //ROS2 ros::Duration(0.01).sleep();
-            rclcpp::Duration(0.01).seconds();        //check 040404
+            rclcpp::Duration(0.01, 0).seconds();        //check 040404
         }
         res->success = true;
         return true;
