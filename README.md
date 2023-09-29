@@ -4,6 +4,50 @@
 [![license - apache 2.0](https://img.shields.io/:license-Apache%202.0-yellowgreen.svg)](https://opensource.org/licenses/Apache-2.0)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![support level: community](https://img.shields.io/badge/support%20level-community-lightgray.png)](http://rosindustrial.org/news/2016/10/7/better-supporting-a-growing-ros-industrial-software-platform)
+
+
+# NB: This port is non-functional
+These packages have been modified to compile under ROS2 Humble on Ubuntu 22.04. This also requires modified versions of `ros2_control`, `ros2_controllers` and `gazebo_ros2_control`. These are based on outdated commits of the official packages, which have been modified to compile under ROS2 Humble. Newer versions of the packages cannot be used, since the `dsr_control2` package uses an outdated hardware interface API.
+
+This port of `doosan_robot2` from ROS2 Foxy to ROS2 Humble is not currently functional, due to a lack of the [DRFL](https://github.com/doosan-robotics/API-DRFL) library for Ubuntu 22.04. The file `common2/lib/humble/x86_64/libDRFL.a` is compiled for Ubuntu 20.04 and does not run under Ubuntu 22.04. No testing has been done for ROS2 Humble in Ubuntu 20.04.
+
+The build instructions below should work, however whenever the DRFL library is called, the program may crash. For example, when attempting to connect to the robot using `Drfl.open_connection(...)`, a segmentation fault occurs.
+
+# Build
+**Read the note above before attempting to build**
+``` bash
+### Prerequisite installation elements before package installation
+sudo apt install libpoco-dev ros-humble-moveit-msgs ros-humble-control-msgs ros-humble-realtime-tools ros-humble-xacro ros-humble-joint-state-publisher-gui
+
+### We assume that you have installed the ros-humble-desktop package
+### We recommand /home/<user_home>/ros2_ws/src
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+git clone -b humble-dev https://github.com/sam-xl/doosan-robot2.git
+git clone -b humble-doosan https://github.com/sam-xl/ros2_control.git
+git clone -b humble-doosan https://github.com/sam-xl/ros2_controllers.git
+git clone -b humble-doosan https://github.com/sam-xl/gazebo_ros2_control.git
+
+rosdep update
+rosdep install --from-paths src --ignore-src --rosdistro humble -r -y
+
+colcon build --symlink-install
+
+source install/setup.bash
+```
+
+\
+\
+\
+\
+\
+\
+\
+\
+&nbsp;
+
+# Old README contents for reference only
+
 # *overview*
     
     This package provides the function to control all models of Doosan robots in the ROS2(Foxy) environment.
@@ -17,31 +61,7 @@
 [Doosan  Robotics Unveils Industry's First ROS Package that Supports ROS 2 Foxy Fitzroy](https://apnews.com/press-release/pr-newswire/technology-business-south-korea-materials-industry-robotics-511fcf63df0d36340748142a30e88319)
 
 
-# *build* 
-##### *Doosan Robot ROS2 Package is implemented at ROS2-Foxy.*
-    ### Prerequisite installation elements before package installation
-    $ sudo apt-get install libpoco-dev
-    
-    ### We assume that you have installed the ros-foxy-desktop package using the apt-get command.
-    ### We recommand the /home/<user_home>/ros2_ws/src
-    $ mkdir -p ~/ros2_ws/src
-    $ cd ~/ros2_ws/src
-    $ git clone https://github.com/doosan-robotics/doosan-robot2.git
-    $ git clone https://github.com/ros-controls/ros2_control.git
-    $ git clone https://github.com/ros-controls/ros2_controllers.git
-    $ git clone https://github.com/ros-simulation/gazebo_ros2_control.git
-    $ cd ros2_control && git reset --hard 3dc62e28e3bc8cf636275825526c11d13b554bb6 && cd ..
-    $ cd ros2_controllers && git reset --hard 83c494f460f1c8675f4fdd6fb8707b87e81cb197 && cd ..
-    $ cd gazebo_ros2_control && git reset --hard 3dfe04d412d5be4540752e9c1165ccf25d7c51fb && cd ..
-    $ git clone -b ros2 --single-branch https://github.com/ros-planning/moveit_msgs
-    $ cd ~/ros2_ws
-    $ rosdep update
-    $ rosdep install --from-paths src --ignore-src --rosdistro foxy -r -y
-    $ colcon build
-    $ . install/setup.bash
 
-#### dependency package list
-    $ sudo apt-get install ros-foxy-control-msgs ros-foxy-realtime-tools ros-foxy-xacro ros-foxy-joint-state-publisher-gui
 
 # *usage* <a id="chapter-3"></a>
 ### Joint State Publish
