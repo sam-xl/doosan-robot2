@@ -12,7 +12,11 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
-ament_package()
+ament_python_install_package(${PROJECT_NAME})
+install(DIRECTORY imp/
+  DESTINATION lib/${PROJECT_NAME}
+  FILES_MATCHING PATTERN "*.py"
+)
 
 install(PROGRAMS 
     bin/DRCF/DRCF64 bin/DRCF/run_drcf.sh
@@ -21,7 +25,9 @@ install(PROGRAMS
 )
 
 install(DIRECTORY
-    imp bin/DRCF/config 
+    ${PROJECT_NAME} bin/DRCF/config 
     #ROS2 DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
     DESTINATION bin/${PROJECT_NAME}   
 )
+
+ament_package()
