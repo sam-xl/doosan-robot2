@@ -30,7 +30,7 @@ from dsr_msgs2.msg import *
 from dsr_msgs2.srv import *
 
 #-----------------------------------------------------------------------------------
-import DR_init
+from common2 import DR_init
 g_node = None
 g_node = DR_init.__dsr__node
 
@@ -46,8 +46,7 @@ print("_topic_name_prefix ={0}".format(_topic_name_prefix))
 #-----------------------------------------------------------------------------------
 
 
-############### connect to dsr_control2 (ros2 service) ####################################################################### 
-
+############### connect to dsr_control2 (ros2 service) #######################################################################     
 #  system Operations
 _ros2_set_robot_mode             = g_node.create_client(SetRobotMode,           _srv_name_prefix +"system/set_robot_mode")
 _ros2_get_robot_mode             = g_node.create_client(GetRobotMode,           _srv_name_prefix +"system/get_robot_mode")
