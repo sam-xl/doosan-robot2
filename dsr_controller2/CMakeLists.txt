@@ -110,16 +110,16 @@ install(
   dsr_controller2
   EXPORT export_dsr_controller2
   RUNTIME DESTINATION bin
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib/${PROJECT_NAME}
+  LIBRARY DESTINATION lib/${PROJECT_NAME}
 )
 install(
   TARGETS
   dsr_joint_trajectory
   EXPORT export_dsr_joint_trajectory
   RUNTIME DESTINATION bin
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib/${PROJECT_NAME}
+  LIBRARY DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_export_targets(export_dsr_controller2 HAS_LIBRARY_TARGET)
