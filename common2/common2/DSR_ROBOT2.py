@@ -36,7 +36,7 @@ g_node = DR_init.__dsr__node
 
 _robot_id    = DR_init.__dsr__id
 _robot_model = DR_init.__dsr__model
-_srv_name_prefix   = '' # _robot_id + '/' #ROS2  
+_srv_name_prefix = _robot_id + '/'
 _topic_name_prefix = _srv_name_prefix
 
 print("_robot_id ={0}".format(_robot_id))

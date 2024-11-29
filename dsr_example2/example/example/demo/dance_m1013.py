@@ -1,24 +1,30 @@
-import rclpy
 import os
 import sys
+
+import rclpy
 
 # for single robot
 ROBOT_ID   = "dsr01"
 ROBOT_MODEL= "m1013"
 
+import common2
 import DR_init
+
 DR_init.__dsr__id   = ROBOT_ID
 DR_init.__dsr__model = ROBOT_MODEL
 
 def main(args=None):
         rclpy.init(args=args)
 
-        node = rclpy.create_node('dsr_example_demo_py', namespace=ROBOT_ID)
+        node = rclpy.create_node('dsr_example_demo_py')
 
         DR_init.__dsr__node = node
 
         try:
-                from DSR_ROBOT2 import print_ext_result, movej, movel, movec, move_periodic, move_spiral, set_velx, set_accx, DR_BASE, DR_TOOL, DR_AXIS_X, DR_MV_MOD_ABS
+                from DSR_ROBOT2 import (DR_AXIS_X, DR_BASE, DR_MV_MOD_ABS, DR_TOOL, move_periodic,
+                                        move_spiral, movec, movej, movel, print_ext_result,
+                                        set_accx, set_velx)
+
                 # print_result("Import DSR_ROBOT2 Success!")
         except ImportError as e:
                 print(f"Error importing DSR_ROBOT2 : {e}")

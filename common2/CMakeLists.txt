@@ -12,6 +12,7 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 
+ament_python_install_package(${PROJECT_NAME})
 ament_package()
 
 #install(PROGRAMS 
@@ -29,9 +30,4 @@ ament_package()
 install(DIRECTORY bin DESTINATION share/${PROJECT_NAME}
   PATTERN "bin/*"
   PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
-)
-
-install(DIRECTORY imp DESTINATION lib/${PROJECT_NAME}
-  FILES_MATCHING PATTERN "*.py"
-  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ
 )
